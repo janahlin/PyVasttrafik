@@ -1,13 +1,19 @@
-"""PyTrafik Västtrafik Journey Planner API Client"""
-import base64
+"""PyVasttrafik Västtrafik Journey Planner API Client"""
+# import base64
 import json
 import time as time_module
 import requests
+import vasttrafik
 
-TOKEN_URL = 'https://api.vasttrafik.se/token'
-API_BASE_URL = 'https://api.vasttrafik.se/bin/rest.exe/v2'
-CONSUMER_KEY = '<YOUR_CONSUMER_KEY>'
-CONSUMER_SECRET = '<YOUR_CONSUMER_SECRET>'
+TOKEN_URL = "https://ext-api.vasttrafik.se/token"
+API_BASE_URL = "https://ext-api.vasttrafik.se/pr/v4"
+CONSUMER_KEY = "BQC13xQ6eWZVZGXaHPO9ylOtN9ca"
+CONSUMER_SECRET = "xbajICAwyEpIHPoatzOJvqYcs_Qa"
+CONSUMER_SCOPE = "1"
+
+auth = vasttrafik.auth(CONSUMER_KEY, CONSUMER_SECRET, CONSUMER_SCOPE)
+resepl = vasttrafik.Reseplaneraren(auth)
+trafficsit = vasttrafik.TrafficSituations(auth)
 
 
 def latlon_to_string_representation(latlon):
@@ -17,56 +23,36 @@ def latlon_to_string_representation(latlon):
     return str(round(latlon * 1000000)).rstrip('0').rstrip('.')
 
 
-def fetch_token(key, secret):
-    """Fetches a token from the API to use in subsequent calls
-    - key:      key from API portal
-    - secret:   secret from API portal
-    """
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + base64.b64encode((key + ':' + secret).encode()).decode()
-    }
-    data = {'grant_type': 'client_credentials'}
-
-    response = requests.post(TOKEN_URL, data=data, headers=headers)
-    obj = json.loads(response.content.decode('UTF-8'))
-    return obj['access_token']
-
-
 class Client:
-    """Client used to communnicate with the API."""
+    """Client used to communicate with the API."""
 
-    def __init__(self, response_format, key=CONSUMER_KEY, secret=CONSUMER_SECRET):
-        self.token = fetch_token(key, secret)
-        if response_format in ['JSON', 'json']:
-            self.response_format = 'json'
-        else:
-            self.response_format = ''  # defaulting to XML
+    def __init__(self):
+        # self.token = fetch_token(key, secret)
+        self.auth = auth
+        self.planner = resepl
+        self.disturb = trafficsit
+        self.response_format = 'json'
 
     def get_journey_detail(self):
         """/journeyDetail endpoint"""
         raise NotImplementedError
 
-    def get_all_stops(self, query_params=None):
-        """/location.allstops endpoint"""
-        data = self.get('/location.allstops', query_params)
-        return data['LocationList']['StopLocation']
-
-    def get_nearby_stops(self, lat, long, query_params=None):
+    def get_location_by_coord(self, lat, long, query_params=None):
         """/location.nearbystops endpoint
         - lat:  latitude in long format
         - long: longitude in long format
         """
-        data = self.get('/location.nearbystops?originCoordLat=' +
-                        str(lat) + '&originCoordLong=' + str(long), query_params)
-        return data['LocationList']['StopLocation']
+        kwargs = dict["latitude": lat, "longitude": long]
+        data = self.planner.location_by_coord(API_BASE_URL, **kwargs)
 
-    def get_stops_by_name(self, query, query_params=None):
+        return data['results']
+
+    def get_location_by_text(self, query, query_params=None):
         """/location.name endpoint
         - query: name to search for as string
         """
         data = self.get('/location.name?input=' + query, query_params)
-        return data['LocationList']['StopLocation']
+        return data['results']
 
     def get_nearby_address(self, lat, long, query_params=None):
         """/location.nearbyaddress

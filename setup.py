@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-""" Setup for pytrafik """
+""" Setup for pyvasttrafik """
 
 from distutils.core import setup
 
 setup(
-    name='pytrafik',
+    name='pyvasttrafik',
     version='0.0.1',
     description='PyVasttrafik',
     long_description='Wrapper for Västtrafik public APIs.',
