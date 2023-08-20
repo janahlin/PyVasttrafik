@@ -13,7 +13,7 @@ pycodestyle
 pyflakes
 pylint
 pyparsing
-requests
+requests~=2.31.0
 tabulate
 toml
 typing-extensions

@@ -1,6 +1,12 @@
 # coding: utf-8
 import base64
 import requests
+import six
+
+from pyvasttrafik.api.exceptions import (  # noqa: F401
+    ApiTypeError,
+    ApiValueError
+)
 
 
 class Auth:
@@ -53,10 +59,11 @@ class Reseplaneraren:
         if type(auth) != Auth:
             raise TypeError("Expected Auth object")
         self.auth = auth
+        self.url = "https://ext-api.vasttrafik.se/pr/v4"
 
-    def journeys(self, baseurl, **kwargs):
+    def journeys(self, **kwargs):
         header = {"Authorization": self.auth.token}
-        url = baseurl + "/journeys"
+        url = self.url + "/journeys"
         kwargs["format"] = "json"
 
         response = requests.get(url, headers=header, params=kwargs)
@@ -64,9 +71,9 @@ class Reseplaneraren:
 
         return response.json()
 
-    def location_by_coord(self, baseurl, **kwargs):
+    def location_by_coord(self, **kwargs):
         header = {"Authorization": self.auth.token}
-        url = baseurl + "/locations/by-coordinates"
+        url = self.url + "/locations/by-coordinates"
         kwargs["format"] = "json"
 
         response = requests.get(url, headers=header, params=kwargs)
@@ -74,10 +81,60 @@ class Reseplaneraren:
 
         return response.json()
 
-    def location_by_text(self, baseurl, **kwargs):
+    def locations_by_text(self, **kwargs):
+        local_var_params = locals()
+
+        all_params = [
+            'q',
+            'types',
+            'limit',
+            'offset'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method locations_by_text_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if local_var_params.get('q') is not None:  # noqa: E501
+            query_params.append(('q', local_var_params['q']))  # noqa: E501
+        if local_var_params.get('types') is not None:  # noqa: E501
+            query_params.append(('types', local_var_params['types']))  # noqa: E501
+            collection_formats['types'] = 'multi'  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
+            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
+        if local_var_params.get('offset') is not None:  # noqa: E501
+            query_params.append(('offset', local_var_params['offset']))  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+
         header = {"Authorization": self.auth.token}
-        url = baseurl + "locations/by-text"
-        kwargs["format"] = "json"
+        url = self.url + "locations/by-text"
 
         response = requests.get(url, headers=header, params=kwargs)
         response = self.auth.check_response(response)
@@ -170,18 +227,17 @@ class TrafficSituations:
         url = self.url + f'/stoparea/{gid}'
         return self.__get(url)
 
+# if __name__ == "__main__":
+#    with open("credentials.csv", "r") as f:
+#        key, secret = f.read().split(",")
 
-if __name__ == "__main__":
-    with open("credentials.csv", "r") as f:
-        key, secret = f.read().split(",")
+#    auth = Auth(key, secret, 0)
+#    ts = TrafficSituations(auth)
+#    vt = Reseplaneraren(auth)
 
-    auth = Auth(key, secret, 0)
-    ts = TrafficSituations(auth)
-    # vt = Reseplaneraren(auth)
-
-    s = ts.trafficsituations()[0]
-    print(s)
-    # stop1 = vt.location_name(input="Kungssten").get("LocationList").get("StopLocation")[0].get("id")
-    # print(ts.stoppoint(9022014001040002))
-    # stop2 = vt.location_name(input="Kampenhof").get("LocationList").get("StopLocation")[0].get("id")
-    # print(vt.trip(originId=stop1, destId=stop2, date=20190215, time="15:24"))
+# s = ts.trafficsituations()[0]
+# print(s)
+# stop1 = vt.location_name(input="Kungssten").get("LocationList").get("StopLocation")[0].get("id")
+# print(ts.stoppoint(9022014001040002))
+# stop2 = vt.location_name(input="Kampenhof").get("LocationList").get("StopLocation")[0].get("id")
+# print(vt.trip(originId=stop1, destId=stop2, date=20190215, time="15:24"))

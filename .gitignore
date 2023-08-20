@@ -3,3 +3,4 @@
 env/
 MANIFEST
 dist
+credentials.csv
