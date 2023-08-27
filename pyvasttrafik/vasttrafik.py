@@ -413,6 +413,899 @@ class Reseplaneraren:
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
 
+    def positions_get(self, lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, **kwargs):  # noqa: E501
+        """Returns journey positions within a bounding box  # noqa: E501
+
+        Sample request:        GET /positions?lowerLeftLat=57.721723&lowerLeftLong=12.011882&upperRightLat=57.737549&upperRightLong=12.039268&limit=100  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.positions_get(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
+        >>> result = thread.get()
+
+        :param lower_left_lat: Lower left latitude of bounding box. (required)
+        :type lower_left_lat: float
+        :param lower_left_long: Lower left longitude of bounding box. (required)
+        :type lower_left_long: float
+        :param upper_right_lat: Upper right latitude of bounding box. (required)
+        :type upper_right_lat: float
+        :param upper_right_long: Upper right longitude of bounding box. (required)
+        :type upper_right_long: float
+        :param transport_modes: The transport modes to include when searching for journeys, if none specified all transport modes are included.
+        :type transport_modes: list[VTApiPlaneraResaCoreModelsPositionTransportMode]
+        :param details_references: Filter journeys by one or more journey details reference.
+        :type details_references: list[str]
+        :param line_designations: Only journeys running the given lineDesignations (case sensitive) are part of the result.
+        :type line_designations: list[str]
+        :param limit: Maximum number of journeys in response. Range from 1 to 200. Defaults to 100
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[VTApiPlaneraResaWebV4ModelsPositionsJourneyPositionApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, **kwargs)  # noqa: E501
+
+    def positions_get_with_http_info(self, lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, **kwargs):  # noqa: E501
+        """Returns journey positions within a bounding box  # noqa: E501
+
+        Sample request:        GET /positions?lowerLeftLat=57.721723&lowerLeftLong=12.011882&upperRightLat=57.737549&upperRightLong=12.039268&limit=100  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
+        >>> result = thread.get()
+
+        :param lower_left_lat: Lower left latitude of bounding box. (required)
+        :type lower_left_lat: float
+        :param lower_left_long: Lower left longitude of bounding box. (required)
+        :type lower_left_long: float
+        :param upper_right_lat: Upper right latitude of bounding box. (required)
+        :type upper_right_lat: float
+        :param upper_right_long: Upper right longitude of bounding box. (required)
+        :type upper_right_long: float
+        :param transport_modes: The transport modes to include when searching for journeys, if none specified all transport modes are included.
+        :type transport_modes: list[VTApiPlaneraResaCoreModelsPositionTransportMode]
+        :param details_references: Filter journeys by one or more journey details reference.
+        :type details_references: list[str]
+        :param line_designations: Only journeys running the given lineDesignations (case sensitive) are part of the result.
+        :type line_designations: list[str]
+        :param limit: Maximum number of journeys in response. Range from 1 to 200. Defaults to 100
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[VTApiPlaneraResaWebV4ModelsPositionsJourneyPositionApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'lower_left_lat',
+            'lower_left_long',
+            'upper_right_lat',
+            'upper_right_long',
+            'transport_modes',
+            'details_references',
+            'line_designations',
+            'limit'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method positions_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'lower_left_lat' is set
+        if self.api_client.client_side_validation and local_var_params.get('lower_left_lat') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `lower_left_lat` when calling `positions_get`")  # noqa: E501
+        # verify the required parameter 'lower_left_long' is set
+        if self.api_client.client_side_validation and local_var_params.get('lower_left_long') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `lower_left_long` when calling `positions_get`")  # noqa: E501
+        # verify the required parameter 'upper_right_lat' is set
+        if self.api_client.client_side_validation and local_var_params.get('upper_right_lat') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `upper_right_lat` when calling `positions_get`")  # noqa: E501
+        # verify the required parameter 'upper_right_long' is set
+        if self.api_client.client_side_validation and local_var_params.get('upper_right_long') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `upper_right_long` when calling `positions_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if local_var_params.get('lower_left_lat') is not None:  # noqa: E501
+            query_params.append(('lowerLeftLat', local_var_params['lower_left_lat']))  # noqa: E501
+        if local_var_params.get('lower_left_long') is not None:  # noqa: E501
+            query_params.append(('lowerLeftLong', local_var_params['lower_left_long']))  # noqa: E501
+        if local_var_params.get('upper_right_lat') is not None:  # noqa: E501
+            query_params.append(('upperRightLat', local_var_params['upper_right_lat']))  # noqa: E501
+        if local_var_params.get('upper_right_long') is not None:  # noqa: E501
+            query_params.append(('upperRightLong', local_var_params['upper_right_long']))  # noqa: E501
+        if local_var_params.get('transport_modes') is not None:  # noqa: E501
+            query_params.append(('transportModes', local_var_params['transport_modes']))  # noqa: E501
+            collection_formats['transportModes'] = 'multi'  # noqa: E501
+        if local_var_params.get('details_references') is not None:  # noqa: E501
+            query_params.append(('detailsReferences', local_var_params['details_references']))  # noqa: E501
+            collection_formats['detailsReferences'] = 'multi'  # noqa: E501
+        if local_var_params.get('line_designations') is not None:  # noqa: E501
+            query_params.append(('lineDesignations', local_var_params['line_designations']))  # noqa: E501
+            collection_formats['lineDesignations'] = 'multi'  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
+            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[VTApiPlaneraResaWebV4ModelsPositionsJourneyPositionApiModel]",
+            400: "VTApiPlaneraResaWebV4ModelsApiError",
+            500: None,
+            503: None,
+        }
+
+        return self.api_client.call_api(
+            '/positions', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def stop_areas_stop_area_gid_arrivals_details_reference_details_get(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns details about an arrival.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014001760000/arrivals/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_arrivals_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
+        :type details_reference: str
+        :param stop_area_gid: (required)
+        :type stop_area_gid: str
+        :param includes: The additional information to include in the response.
+        :type includes: list[VTApiPlaneraResaWebV4ModelsArrivalDetailsIncludeType]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsArrivalDetailsApiModel
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_area_gid, **kwargs)  # noqa: E501
+
+    def stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns details about an arrival.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014001760000/arrivals/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
+        :type details_reference: str
+        :param stop_area_gid: (required)
+        :type stop_area_gid: str
+        :param includes: The additional information to include in the response.
+        :type includes: list[VTApiPlaneraResaWebV4ModelsArrivalDetailsIncludeType]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsArrivalDetailsApiModel, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'details_reference',
+            'stop_area_gid',
+            'includes'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method stop_areas_stop_area_gid_arrivals_details_reference_details_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'details_reference' is set
+        if self.api_client.client_side_validation and local_var_params.get('details_reference') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
+        # verify the required parameter 'stop_area_gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'details_reference' in local_var_params:
+            path_params['detailsReference'] = local_var_params['details_reference']  # noqa: E501
+        if 'stop_area_gid' in local_var_params:
+            path_params['stopAreaGid'] = local_var_params['stop_area_gid']  # noqa: E501
+
+        query_params = []
+        if local_var_params.get('includes') is not None:  # noqa: E501
+            query_params.append(('includes', local_var_params['includes']))  # noqa: E501
+            collection_formats['includes'] = 'multi'  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsArrivalDetailsApiModel",
+            400: "VTApiPlaneraResaWebV4ModelsApiError",
+            404: "MicrosoftAspNetCoreMvcProblemDetails",
+            500: None,
+            503: None,
+        }
+
+        return self.api_client.call_api(
+            '/stop-areas/{stopAreaGid}/arrivals/{detailsReference}/details', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def stop_areas_stop_area_gid_arrivals_get(self, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns arrivals to the specified stop area at the specified time.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014003980000/arrivals  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_arrivals_get(stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
+        :type stop_area_gid: str
+        :param start_date_time: The start of the time interval for which to get upcoming arrivals. Must be specified in RFC 3339 format or be null which means that the current time on the server is used.
+        :type start_date_time: datetime
+        :param platforms: Filter results by platform. Multiple platforms are separated by comma. Case sensitive.
+        :type platforms: str
+        :param time_span_in_minutes: The number of minutes from the start time for which to get upcoming arrivals. Allowed values are between 0 and 1440.
+        :type time_span_in_minutes: int
+        :param max_arrivals_per_line_and_direction: The maximum number of arrivals for a single line in a specific direction.
+        :type max_arrivals_per_line_and_direction: int
+        :param limit: The number of results to return.
+        :type limit: int
+        :param offset: The zero-based start offset of the pagination.
+        :type offset: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetArrivalsResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.stop_areas_stop_area_gid_arrivals_get_with_http_info(stop_area_gid, **kwargs)  # noqa: E501
+
+    def stop_areas_stop_area_gid_arrivals_get_with_http_info(self, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns arrivals to the specified stop area at the specified time.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014003980000/arrivals  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_arrivals_get_with_http_info(stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
+        :type stop_area_gid: str
+        :param start_date_time: The start of the time interval for which to get upcoming arrivals. Must be specified in RFC 3339 format or be null which means that the current time on the server is used.
+        :type start_date_time: datetime
+        :param platforms: Filter results by platform. Multiple platforms are separated by comma. Case sensitive.
+        :type platforms: str
+        :param time_span_in_minutes: The number of minutes from the start time for which to get upcoming arrivals. Allowed values are between 0 and 1440.
+        :type time_span_in_minutes: int
+        :param max_arrivals_per_line_and_direction: The maximum number of arrivals for a single line in a specific direction.
+        :type max_arrivals_per_line_and_direction: int
+        :param limit: The number of results to return.
+        :type limit: int
+        :param offset: The zero-based start offset of the pagination.
+        :type offset: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetArrivalsResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'stop_area_gid',
+            'start_date_time',
+            'platforms',
+            'time_span_in_minutes',
+            'max_arrivals_per_line_and_direction',
+            'limit',
+            'offset'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method stop_areas_stop_area_gid_arrivals_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'stop_area_gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'stop_area_gid' in local_var_params:
+            path_params['stopAreaGid'] = local_var_params['stop_area_gid']  # noqa: E501
+
+        query_params = []
+        if local_var_params.get('start_date_time') is not None:  # noqa: E501
+            query_params.append(('startDateTime', local_var_params['start_date_time']))  # noqa: E501
+        if local_var_params.get('platforms') is not None:  # noqa: E501
+            query_params.append(('platforms', local_var_params['platforms']))  # noqa: E501
+        if local_var_params.get('time_span_in_minutes') is not None:  # noqa: E501
+            query_params.append(('timeSpanInMinutes', local_var_params['time_span_in_minutes']))  # noqa: E501
+        if local_var_params.get('max_arrivals_per_line_and_direction') is not None:  # noqa: E501
+            query_params.append(('maxArrivalsPerLineAndDirection', local_var_params['max_arrivals_per_line_and_direction']))  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
+            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
+        if local_var_params.get('offset') is not None:  # noqa: E501
+            query_params.append(('offset', local_var_params['offset']))  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetArrivalsResponse",
+            400: "VTApiPlaneraResaWebV4ModelsApiError",
+            404: "MicrosoftAspNetCoreMvcProblemDetails",
+            500: None,
+            503: None,
+        }
+
+        return self.api_client.call_api(
+            '/stop-areas/{stopAreaGid}/arrivals', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def stop_areas_stop_area_gid_departures_details_reference_details_get(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns details about a departure.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014001760000/departures/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_departures_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
+        :type details_reference: str
+        :param stop_area_gid: (required)
+        :type stop_area_gid: str
+        :param includes: The additional information to include in the response.
+        :type includes: list[VTApiPlaneraResaWebV4ModelsDepartureDetailsIncludeType]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsDepartureDetailsApiModel
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_area_gid, **kwargs)  # noqa: E501
+
+    def stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns details about a departure.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014001760000/departures/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
+        :type details_reference: str
+        :param stop_area_gid: (required)
+        :type stop_area_gid: str
+        :param includes: The additional information to include in the response.
+        :type includes: list[VTApiPlaneraResaWebV4ModelsDepartureDetailsIncludeType]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsDepartureDetailsApiModel, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'details_reference',
+            'stop_area_gid',
+            'includes'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method stop_areas_stop_area_gid_departures_details_reference_details_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'details_reference' is set
+        if self.api_client.client_side_validation and local_var_params.get('details_reference') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
+        # verify the required parameter 'stop_area_gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'details_reference' in local_var_params:
+            path_params['detailsReference'] = local_var_params['details_reference']  # noqa: E501
+        if 'stop_area_gid' in local_var_params:
+            path_params['stopAreaGid'] = local_var_params['stop_area_gid']  # noqa: E501
+
+        query_params = []
+        if local_var_params.get('includes') is not None:  # noqa: E501
+            query_params.append(('includes', local_var_params['includes']))  # noqa: E501
+            collection_formats['includes'] = 'multi'  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsDepartureDetailsApiModel",
+            400: "VTApiPlaneraResaWebV4ModelsApiError",
+            404: "MicrosoftAspNetCoreMvcProblemDetails",
+            500: None,
+            503: None,
+        }
+
+        return self.api_client.call_api(
+            '/stop-areas/{stopAreaGid}/departures/{detailsReference}/details', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def stop_areas_stop_area_gid_departures_get(self, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns departures from the specified stop area at the specified time.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014003980000/departures  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_departures_get(stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
+        :type stop_area_gid: str
+        :param start_date_time: The start of the time interval for which to get upcoming departures. Must be specified in RFC 3339 format or be null which means that the current time on the server is used.
+        :type start_date_time: datetime
+        :param platforms: Filter results by platform. Multiple platforms are separated by comma. Case sensitive.
+        :type platforms: str
+        :param time_span_in_minutes: The number of minutes from the start time for which to get upcoming departures. Allowed values are between 0 and 1440.
+        :type time_span_in_minutes: int
+        :param max_departures_per_line_and_direction: The maximum number of departures for a single line in a specific direction.
+        :type max_departures_per_line_and_direction: int
+        :param limit: The number of results to return.
+        :type limit: int
+        :param offset: The zero-based start offset of the pagination.
+        :type offset: int
+        :param include_occupancy: Includes occupancy in departure.
+        :type include_occupancy: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetDeparturesResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.stop_areas_stop_area_gid_departures_get_with_http_info(stop_area_gid, **kwargs)  # noqa: E501
+
+    def stop_areas_stop_area_gid_departures_get_with_http_info(self, stop_area_gid, **kwargs):  # noqa: E501
+        """Returns departures from the specified stop area at the specified time.  # noqa: E501
+
+        Sample request:        GET /stop-areas/9021014003980000/departures  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.stop_areas_stop_area_gid_departures_get_with_http_info(stop_area_gid, async_req=True)
+        >>> result = thread.get()
+
+        :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
+        :type stop_area_gid: str
+        :param start_date_time: The start of the time interval for which to get upcoming departures. Must be specified in RFC 3339 format or be null which means that the current time on the server is used.
+        :type start_date_time: datetime
+        :param platforms: Filter results by platform. Multiple platforms are separated by comma. Case sensitive.
+        :type platforms: str
+        :param time_span_in_minutes: The number of minutes from the start time for which to get upcoming departures. Allowed values are between 0 and 1440.
+        :type time_span_in_minutes: int
+        :param max_departures_per_line_and_direction: The maximum number of departures for a single line in a specific direction.
+        :type max_departures_per_line_and_direction: int
+        :param limit: The number of results to return.
+        :type limit: int
+        :param offset: The zero-based start offset of the pagination.
+        :type offset: int
+        :param include_occupancy: Includes occupancy in departure.
+        :type include_occupancy: bool
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetDeparturesResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'stop_area_gid',
+            'start_date_time',
+            'platforms',
+            'time_span_in_minutes',
+            'max_departures_per_line_and_direction',
+            'limit',
+            'offset',
+            'include_occupancy'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method stop_areas_stop_area_gid_departures_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'stop_area_gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'stop_area_gid' in local_var_params:
+            path_params['stopAreaGid'] = local_var_params['stop_area_gid']  # noqa: E501
+
+        query_params = []
+        if local_var_params.get('start_date_time') is not None:  # noqa: E501
+            query_params.append(('startDateTime', local_var_params['start_date_time']))  # noqa: E501
+        if local_var_params.get('platforms') is not None:  # noqa: E501
+            query_params.append(('platforms', local_var_params['platforms']))  # noqa: E501
+        if local_var_params.get('time_span_in_minutes') is not None:  # noqa: E501
+            query_params.append(('timeSpanInMinutes', local_var_params['time_span_in_minutes']))  # noqa: E501
+        if local_var_params.get('max_departures_per_line_and_direction') is not None:  # noqa: E501
+            query_params.append(('maxDeparturesPerLineAndDirection', local_var_params['max_departures_per_line_and_direction']))  # noqa: E501
+        if local_var_params.get('limit') is not None:  # noqa: E501
+            query_params.append(('limit', local_var_params['limit']))  # noqa: E501
+        if local_var_params.get('offset') is not None:  # noqa: E501
+            query_params.append(('offset', local_var_params['offset']))  # noqa: E501
+        if local_var_params.get('include_occupancy') is not None:  # noqa: E501
+            query_params.append(('includeOccupancy', local_var_params['include_occupancy']))  # noqa: E501
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsGetDeparturesResponse",
+            400: "VTApiPlaneraResaWebV4ModelsApiError",
+            404: "MicrosoftAspNetCoreMvcProblemDetails",
+            500: None,
+            503: None,
+        }
+
+        return self.api_client.call_api(
+            '/stop-areas/{stopAreaGid}/departures', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+
     def request(self, url):
         header = {"Authorization": self.auth.token}
         response = requests.get(url, headers=header)
@@ -459,17 +1352,4 @@ class TrafficSituations:
         url = self.url + f'/stoparea/{gid}'
         return self.__get(url)
 
-# if __name__ == "__main__":
-#    with open("credentials.csv", "r") as f:
-#        key, secret = f.read().split(",")
 
-#    auth = Auth(key, secret, 0)
-#    ts = TrafficSituations(auth)
-#    vt = Reseplaneraren(auth)
-
-# s = ts.trafficsituations()[0]
-# print(s)
-# stop1 = vt.location_name(input="Kungssten").get("LocationList").get("StopLocation")[0].get("id")
-# print(ts.stoppoint(9022014001040002))
-# stop2 = vt.location_name(input="Kampenhof").get("LocationList").get("StopLocation")[0].get("id")
-# print(vt.trip(originId=stop1, destId=stop2, date=20190215, time="15:24"))
