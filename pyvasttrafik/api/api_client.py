@@ -25,7 +25,7 @@ import six
 from six.moves.urllib.parse import quote
 
 from pyvasttrafik.api.configuration import Configuration
-# import openapi_client.models
+import pyvasttrafik.models
 from pyvasttrafik.api import rest
 from pyvasttrafik.api.exceptions import ApiValueError, ApiException
 
@@ -297,12 +297,12 @@ class ApiClient(object):
 
         if type(klass) == str:
             if klass.startswith('list['):
-                sub_kls = re.match(r'list\[(.*)\]', klass).group(1)
+                sub_kls = re.match(r'list\[(.*)]', klass).group(1)
                 return [self.__deserialize(sub_data, sub_kls)
                         for sub_data in data]
 
             if klass.startswith('dict['):
-                sub_kls = re.match(r'dict\[([^,]*), (.*)\]', klass).group(2)
+                sub_kls = re.match(r'dict\[([^,]*), (.*)]', klass).group(2)
                 return {k: self.__deserialize(v, sub_kls)
                         for k, v in six.iteritems(data)}
 
@@ -310,7 +310,7 @@ class ApiClient(object):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(openapi_client.models, klass)
+                klass = getattr(pyvasttrafik.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

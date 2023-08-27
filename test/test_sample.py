@@ -1,3 +1,4 @@
+import base64
 import unittest
 from pyvasttrafik import vasttrafik
 
@@ -7,15 +8,20 @@ class TestAuthMethod(unittest.TestCase):
         with open("credentials.csv", "r") as f:
             key, secret = f.read().split(",")
 
-        config = vasttrafik.Configuration.get_default_copy()
+        # print(key)
+        # print(secret)
 
-        rest_client = pyvasttrafik.api.rest.RESTClientObject(config)
-        default_headers = {}
+        auth = vasttrafik.Auth(key, secret, 1)
 
-        user_agent = 'OpenAPI-Generator/1.0.0/python'
-        client_side_validation = config.client_side_validation
+        # print(auth.token)
 
-        print(rest_client)
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        print(rp.locations_by_text_get("Åstol"))
+
+
 
 
 if __name__ == '__main__':
