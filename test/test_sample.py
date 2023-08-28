@@ -61,7 +61,7 @@ class TestAuthMethod(unittest.TestCase):
 
         # print(rp.positions_get(lowleftlat, lowleftlong, upprightlat, upprightlong))
 
-    def test_stop_area(self):
+    def test_departure_area(self):
         with open("credentials.csv", "r") as f:
             key, secret = f.read().split(",")
 
@@ -81,8 +81,29 @@ class TestAuthMethod(unittest.TestCase):
 
         result = rp.stop_areas_stop_area_gid_departures_get(res.gid)
 
-        print(result)
+        # print(result)
 
+    def test_arrival_area(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        # print(key)
+        # print(secret)
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        # print(auth.token)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        res = data.results[0]
+
+        result = rp.stop_areas_stop_area_gid_arrivals_get(res.gid)
+
+        print(result)
 
 if __name__ == '__main__':
     unittest.main()
