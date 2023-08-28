@@ -455,9 +455,11 @@ class Reseplaneraren:
         :rtype: list[VTApiPlaneraResaWebV4ModelsPositionsJourneyPositionApiModel]
         """
         kwargs['_return_http_data_only'] = True
-        return self.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, **kwargs)  # noqa: E501
+        return self.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long,
+                                                 **kwargs)  # noqa: E501
 
-    def positions_get_with_http_info(self, lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, **kwargs):  # noqa: E501
+    def positions_get_with_http_info(self, lower_left_lat, lower_left_long, upper_right_lat, upper_right_long,
+                                     **kwargs):  # noqa: E501
         """Returns journey positions within a bounding box  # noqa: E501
 
         Sample request:        GET /positions?lowerLeftLat=57.721723&lowerLeftLong=12.011882&upperRightLat=57.737549&upperRightLong=12.039268&limit=100  # noqa: E501
@@ -541,16 +543,20 @@ class Reseplaneraren:
         del local_var_params['kwargs']
         # verify the required parameter 'lower_left_lat' is set
         if self.api_client.client_side_validation and local_var_params.get('lower_left_lat') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `lower_left_lat` when calling `positions_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `lower_left_lat` when calling `positions_get`")  # noqa: E501
         # verify the required parameter 'lower_left_long' is set
         if self.api_client.client_side_validation and local_var_params.get('lower_left_long') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `lower_left_long` when calling `positions_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `lower_left_long` when calling `positions_get`")  # noqa: E501
         # verify the required parameter 'upper_right_lat' is set
         if self.api_client.client_side_validation and local_var_params.get('upper_right_lat') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `upper_right_lat` when calling `positions_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `upper_right_lat` when calling `positions_get`")  # noqa: E501
         # verify the required parameter 'upper_right_long' is set
         if self.api_client.client_side_validation and local_var_params.get('upper_right_long') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `upper_right_long` when calling `positions_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `upper_right_long` when calling `positions_get`")  # noqa: E501
 
         collection_formats = {}
 
@@ -614,7 +620,8 @@ class Reseplaneraren:
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
 
-    def stop_areas_stop_area_gid_arrivals_details_reference_details_get(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+    def stop_areas_stop_area_gid_arrivals_details_reference_details_get(self, details_reference, stop_area_gid,
+                                                                        **kwargs):  # noqa: E501
         """Returns details about an arrival.  # noqa: E501
 
         Sample request:        GET /stop-areas/9021014001760000/arrivals/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
@@ -646,9 +653,13 @@ class Reseplaneraren:
         :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsArrivalDetailsApiModel
         """
         kwargs['_return_http_data_only'] = True
-        return self.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_area_gid, **kwargs)  # noqa: E501
+        return self.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference,
+                                                                                                   stop_area_gid,
+                                                                                                   **kwargs)  # noqa: E501
 
-    def stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+    def stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(self, details_reference,
+                                                                                       stop_area_gid,
+                                                                                       **kwargs):  # noqa: E501
         """Returns details about an arrival.  # noqa: E501
 
         Sample request:        GET /stop-areas/9021014001760000/arrivals/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
@@ -717,10 +728,12 @@ class Reseplaneraren:
         del local_var_params['kwargs']
         # verify the required parameter 'details_reference' is set
         if self.api_client.client_side_validation and local_var_params.get('details_reference') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
         # verify the required parameter 'stop_area_gid' is set
         if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_details_reference_details_get`")  # noqa: E501
 
         collection_formats = {}
 
@@ -896,7 +909,8 @@ class Reseplaneraren:
         del local_var_params['kwargs']
         # verify the required parameter 'stop_area_gid' is set
         if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_arrivals_get`")  # noqa: E501
 
         collection_formats = {}
 
@@ -912,7 +926,8 @@ class Reseplaneraren:
         if local_var_params.get('time_span_in_minutes') is not None:  # noqa: E501
             query_params.append(('timeSpanInMinutes', local_var_params['time_span_in_minutes']))  # noqa: E501
         if local_var_params.get('max_arrivals_per_line_and_direction') is not None:  # noqa: E501
-            query_params.append(('maxArrivalsPerLineAndDirection', local_var_params['max_arrivals_per_line_and_direction']))  # noqa: E501
+            query_params.append(('maxArrivalsPerLineAndDirection',
+                                 local_var_params['max_arrivals_per_line_and_direction']))  # noqa: E501
         if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
         if local_var_params.get('offset') is not None:  # noqa: E501
@@ -956,7 +971,8 @@ class Reseplaneraren:
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
 
-    def stop_areas_stop_area_gid_departures_details_reference_details_get(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+    def stop_areas_stop_area_gid_departures_details_reference_details_get(self, details_reference, stop_area_gid,
+                                                                          **kwargs):  # noqa: E501
         """Returns details about a departure.  # noqa: E501
 
         Sample request:        GET /stop-areas/9021014001760000/departures/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
@@ -988,9 +1004,13 @@ class Reseplaneraren:
         :rtype: VTApiPlaneraResaWebV4ModelsDeparturesAndArrivalsDepartureDetailsApiModel
         """
         kwargs['_return_http_data_only'] = True
-        return self.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_area_gid, **kwargs)  # noqa: E501
+        return self.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference,
+                                                                                                     stop_area_gid,
+                                                                                                     **kwargs)  # noqa: E501
 
-    def stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(self, details_reference, stop_area_gid, **kwargs):  # noqa: E501
+    def stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(self, details_reference,
+                                                                                         stop_area_gid,
+                                                                                         **kwargs):  # noqa: E501
         """Returns details about a departure.  # noqa: E501
 
         Sample request:        GET /stop-areas/9021014001760000/departures/{detailsReference}/details?includes=servicejourneycalls  # noqa: E501
@@ -1059,10 +1079,12 @@ class Reseplaneraren:
         del local_var_params['kwargs']
         # verify the required parameter 'details_reference' is set
         if self.api_client.client_side_validation and local_var_params.get('details_reference') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `details_reference` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
         # verify the required parameter 'stop_area_gid' is set
         if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_details_reference_details_get`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1243,7 +1265,8 @@ class Reseplaneraren:
         del local_var_params['kwargs']
         # verify the required parameter 'stop_area_gid' is set
         if self.api_client.client_side_validation and local_var_params.get('stop_area_gid') is None:  # noqa: E501
-            raise ApiValueError("Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_get`")  # noqa: E501
+            raise ApiValueError(
+                "Missing the required parameter `stop_area_gid` when calling `stop_areas_stop_area_gid_departures_get`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1259,7 +1282,8 @@ class Reseplaneraren:
         if local_var_params.get('time_span_in_minutes') is not None:  # noqa: E501
             query_params.append(('timeSpanInMinutes', local_var_params['time_span_in_minutes']))  # noqa: E501
         if local_var_params.get('max_departures_per_line_and_direction') is not None:  # noqa: E501
-            query_params.append(('maxDeparturesPerLineAndDirection', local_var_params['max_departures_per_line_and_direction']))  # noqa: E501
+            query_params.append(('maxDeparturesPerLineAndDirection',
+                                 local_var_params['max_departures_per_line_and_direction']))  # noqa: E501
         if local_var_params.get('limit') is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
         if local_var_params.get('offset') is not None:  # noqa: E501
@@ -1304,7 +1328,6 @@ class Reseplaneraren:
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
-
 
     def request(self, url):
         header = {"Authorization": self.auth.token}
@@ -1351,5 +1374,3 @@ class TrafficSituations:
     def stoparea(self, gid):
         url = self.url + f'/stoparea/{gid}'
         return self.__get(url)
-
-
