@@ -16,7 +16,7 @@ class TestAuthMethod(unittest.TestCase):
 
         # print(rp.locations_by_text_get("Åstol"))
 
-    def test_locations(self):
+    def test_locations_by_text(self):
         with open("credentials.csv", "r") as f:
             key, secret = f.read().split(",")
 
@@ -30,6 +30,21 @@ class TestAuthMethod(unittest.TestCase):
         res = data.results[0]
 
         # print(res.gid)
+
+    def test_locations_by_coordinates(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_coordinates_get(57.924079,11.589001)
+        # res = data.results[0]
+
+        # print(data)
 
     def test_positions(self):
         with open("credentials.csv", "r") as f:
@@ -66,6 +81,25 @@ class TestAuthMethod(unittest.TestCase):
 
         # print(result)
 
+    def test_departure_area_detail(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        res = data.results[0]
+        # result = rp.stop_areas_stop_area_gid_departures_get(res.gid)
+        result = rp.stop_points_stop_point_gid_departures_get('9022014015535001').results[0]
+
+        detail = rp.stop_areas_stop_area_gid_departures_details_reference_details_get(result.details_reference,'9022014015535001')
+
+        # print(detail)
+
     def test_arrival_area(self):
         with open("credentials.csv", "r") as f:
             key, secret = f.read().split(",")
@@ -82,6 +116,25 @@ class TestAuthMethod(unittest.TestCase):
         result = rp.stop_areas_stop_area_gid_arrivals_get(res.gid)
 
         # print(result)
+
+    def test_arrival_area_detail(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        res = data.results[0]
+        # result = rp.stop_areas_stop_area_gid_departures_get(res.gid)
+        result = rp.stop_points_stop_point_gid_arrivals_get('9022014015535001').results[0]
+
+        detail = rp.stop_areas_stop_area_gid_arrivals_details_reference_details_get(result.details_reference,'V3eyJUIjpbeyJSIjoiMXw2NDM1fDB8ODB8MzA5MjAyMyIsIkkiOjB9XX0')
+
+        print(detail)
 
     def test_departure_point(self):
         with open("credentials.csv", "r") as f:
@@ -115,7 +168,7 @@ class TestAuthMethod(unittest.TestCase):
 
         # print(test)
 
-    def test_journeys(self):
+    def test_journeys_get(self):
         with open("credentials.csv", "r") as f:
             key, secret = f.read().split(",")
 
@@ -132,7 +185,68 @@ class TestAuthMethod(unittest.TestCase):
 
         journey = rp.journeys_get(origin_gid=res.gid, destination_gid=res2.gid, limit=1)
 
-        print(journey)
+        # print(journey)
+
+    def test_journeys_reconstruct(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        data2 = rp.locations_by_text_get("Rönnäng")
+        res = data.results[0]
+        res2 = data2.results[0]
+
+        journey = rp.journeys_get(origin_gid=res.gid, destination_gid=res2.gid, limit=1).results[0]
+
+        reconstruct = rp.journeys_reconstruct_get(journey.reconstruction_reference)
+
+        # print(reconstruct)
+
+    def test_journeys_details(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        data2 = rp.locations_by_text_get("Rönnäng")
+        res = data.results[0]
+        res2 = data2.results[0]
+
+        journey = rp.journeys_get(origin_gid=res.gid, destination_gid=res2.gid, limit=1).results[0]
+
+        details = rp.journeys_details_reference_details_get(journey.details_reference)
+
+        # print(details)
+
+    def test_journeys_valid_time_interval(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        data = rp.locations_by_text_get("Åstol")
+        data2 = rp.locations_by_text_get("Rönnäng")
+        res = data.results[0]
+        res2 = data2.results[0]
+
+        interval = rp.journeys_valid_time_interval_get()
+
+        # print(interval)
 
 
 if __name__ == '__main__':
