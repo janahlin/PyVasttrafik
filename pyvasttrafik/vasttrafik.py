@@ -74,7 +74,7 @@ class Reseplaneraren:
                 This method makes a synchronous HTTP request by default. To make an
                 asynchronous HTTP request, please pass async_req=True
 
-                >>> thread = api.locations_by_coordinates_get(latitude, longitude, async_req=True)
+                >>> thread = Reseplaneraren.locations_by_coordinates_get(latitude, longitude, async_req=True)
                 >>> result = thread.get()
 
                 :param kwargs:
@@ -117,7 +117,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.locations_by_coordinates_get_with_http_info(latitude, longitude, async_req=True)
+        >>> thread = Reseplaneraren.locations_by_coordinates_get_with_http_info(latitude, longitude, async_req=True)
         >>> result = thread.get()
 
         :param latitude: The latitude. (required)
@@ -258,7 +258,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.locations_by_text_get(q, async_req=True)
+        >>> thread = Reseplaneraren.locations_by_text_get(q, async_req=True)
         >>> result = thread.get()
 
         :param q: The search text (e.g. 'brunn', 'cent' or 'Kungsgatan'). The maximum length allowed is 256 characters. (required)
@@ -295,7 +295,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.locations_by_text_get_with_http_info(q, async_req=True)
+        >>> thread = Reseplaneraren.locations_by_text_get_with_http_info(q, async_req=True)
         >>> result = thread.get()
 
         :param q: The search text (e.g. 'brunn', 'cent' or 'Kungsgatan'). The maximum length allowed is 256 characters. (required)
@@ -420,7 +420,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.positions_get(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
+        >>> thread = Reseplaneraren.positions_get(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
         >>> result = thread.get()
 
         :param lower_left_lat: Lower left latitude of bounding box. (required)
@@ -466,7 +466,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
+        >>> thread = Reseplaneraren.positions_get_with_http_info(lower_left_lat, lower_left_long, upper_right_lat, upper_right_long, async_req=True)
         >>> result = thread.get()
 
         :param lower_left_lat: Lower left latitude of bounding box. (required)
@@ -628,7 +628,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_arrivals_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_arrivals_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -666,7 +666,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -793,7 +793,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_arrivals_get(stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_arrivals_get(stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
@@ -835,7 +835,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_arrivals_get_with_http_info(stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_arrivals_get_with_http_info(stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
@@ -979,7 +979,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_departures_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_departures_details_reference_details_get(details_reference, stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1017,7 +1017,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1144,7 +1144,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_departures_get(stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_departures_get(stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
@@ -1188,7 +1188,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_areas_stop_area_gid_departures_get_with_http_info(stop_area_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_areas_stop_area_gid_departures_get_with_http_info(stop_area_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_area_gid: The 16-digit Västtrafik gid of the stop area. (required)
@@ -1337,7 +1337,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_arrivals_details_reference_details_get(details_reference, stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_arrivals_details_reference_details_get(details_reference, stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1375,7 +1375,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_arrivals_details_reference_details_get_with_http_info(details_reference, stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the arrivals call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1502,7 +1502,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_arrivals_get(stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_arrivals_get(stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_point_gid: The 16-digit Västtrafik gid of the stop point. (required)
@@ -1542,7 +1542,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_arrivals_get_with_http_info(stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_arrivals_get_with_http_info(stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_point_gid: The 16-digit Västtrafik gid of the stop point. (required)
@@ -1681,7 +1681,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_departures_details_reference_details_get(details_reference, stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_departures_details_reference_details_get(details_reference, stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1718,7 +1718,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_departures_details_reference_details_get_with_http_info(details_reference, stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the service journey, received from the departures call. A detailsReference is only valid during the same day as it was generated. (required)
@@ -1845,7 +1845,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_departures_get(stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_departures_get(stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_point_gid: The 16-digit Västtrafik gid of the stop point. (required)
@@ -1887,7 +1887,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.stop_points_stop_point_gid_departures_get_with_http_info(stop_point_gid, async_req=True)
+        >>> thread = Reseplaneraren.stop_points_stop_point_gid_departures_get_with_http_info(stop_point_gid, async_req=True)
         >>> result = thread.get()
 
         :param stop_point_gid: The 16-digit Västtrafik gid of the stop point. (required)
@@ -2030,7 +2030,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_details_reference_details_get(details_reference, async_req=True)
+        >>> thread = Reseplaneraren.journeys_details_reference_details_get(details_reference, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the journey, received from the search journeys query. A detailsReference is only valid during the same day as it was generated. (required)
@@ -2068,7 +2068,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_details_reference_details_get_with_http_info(details_reference, async_req=True)
+        >>> thread = Reseplaneraren.journeys_details_reference_details_get_with_http_info(details_reference, async_req=True)
         >>> result = thread.get()
 
         :param details_reference: The reference to the journey, received from the search journeys query. A detailsReference is only valid during the same day as it was generated. (required)
@@ -2203,7 +2203,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_get(async_req=True)
+        >>> thread = Reseplaneraren.journeys_get(async_req=True)
         >>> result = thread.get()
 
         :param origin_gid: The 16-digit Västtrafik gid of the origin location (which could be either a stop area (e.g. '9021014001760000'), a stop point (e.g. '9022014001760004') or meta-station (e.g. '0000000800000022')).
@@ -2287,7 +2287,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_get_with_http_info(async_req=True)
+        >>> thread = Reseplaneraren.journeys_get_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param origin_gid: The 16-digit Västtrafik gid of the origin location (which could be either a stop area (e.g. '9021014001760000'), a stop point (e.g. '9022014001760004') or meta-station (e.g. '0000000800000022')).
@@ -2531,7 +2531,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_reconstruct_get(ref, async_req=True)
+        >>> thread = Reseplaneraren.journeys_reconstruct_get(ref, async_req=True)
         >>> result = thread.get()
 
         :param ref: The reconstruction reference. A reconstructionReference is valid as long as the original journey search is valid. (required)
@@ -2563,7 +2563,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_reconstruct_get_with_http_info(ref, async_req=True)
+        >>> thread = Reseplaneraren.journeys_reconstruct_get_with_http_info(ref, async_req=True)
         >>> result = thread.get()
 
         :param ref: The reconstruction reference. A reconstructionReference is valid as long as the original journey search is valid. (required)
@@ -2678,7 +2678,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_valid_time_interval_get(async_req=True)
+        >>> thread = Reseplaneraren.journeys_valid_time_interval_get(async_req=True)
         >>> result = thread.get()
 
         :param async_req: Whether to execute the request asynchronously.
@@ -2705,7 +2705,7 @@ class Reseplaneraren:
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.journeys_valid_time_interval_get_with_http_info(async_req=True)
+        >>> thread = Reseplaneraren.journeys_valid_time_interval_get_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req: Whether to execute the request asynchronously.
@@ -2800,13 +2800,12 @@ class Reseplaneraren:
             collection_formats=collection_formats,
             _request_auth=local_var_params.get('_request_auth'))
 
-
-    def request(self, url):
-        header = {"Authorization": self.auth.token}
-        response = requests.get(url, headers=header)
-        response = self.auth.check_response(response)
-
-        return response.json()
+    # def request(self, url):
+    #     header = {"Authorization": self.auth.token}
+    #     response = requests.get(url, headers=header)
+    #     response = self.auth.check_response(response)
+    #
+    #     return response.json()
 
 
 class TrafficSituations:
