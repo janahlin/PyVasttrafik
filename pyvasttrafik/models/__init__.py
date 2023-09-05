@@ -16,20 +16,12 @@ from __future__ import absolute_import
 
 __version__ = "1.0.0"
 
-# import apis into sdk package
-# from pyvasttrafik.vasttrafik import Reseplaneraren
-
-# import ApiClient
-# from pyvasttrafik.api.api_client import ApiClient
-# from pyvasttrafik.api.configuration import Configuration
-# from pyvasttrafik.api.exceptions import OpenApiException
-# from pyvasttrafik.api.exceptions import ApiTypeError
-# from pyvasttrafik.api.exceptions import ApiValueError
-# from pyvasttrafik.api.exceptions import ApiKeyError
-# from pyvasttrafik.api.exceptions import ApiAttributeError
-# from pyvasttrafik.api.exceptions import ApiException
-# import models into sdk package
-
+from pyvasttrafik.models.traffic_situation_api_model import TrafficSituationApiModel
+from pyvasttrafik.models.stop_point_api_model import StopPointApiModel
+from pyvasttrafik.models.line_api_model import LineApiModel
+from pyvasttrafik.models.direction_api_model import DirectionApiModel
+from pyvasttrafik.models.municipality_api_model import MunicipalityApiModel
+from pyvasttrafik.models.journey_api_model import JourneyApiModel
 from pyvasttrafik.models.microsoft_asp_net_core_mvc_problem_details import MicrosoftAspNetCoreMvcProblemDetails
 from .vt_api_planera_resa_core_models_date_time_relates_to_type import VTApiPlaneraResaCoreModelsDateTimeRelatesToType
 from pyvasttrafik.models.vt_api_planera_resa_core_models_location_type import VTApiPlaneraResaCoreModelsLocationType

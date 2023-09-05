@@ -2809,39 +2809,821 @@ class Reseplaneraren:
 
 
 class TrafficSituations:
-    def __init__(self, auth):
-        if type(auth) != Auth:
-            raise TypeError("Expected Auth object")
-        self.auth = auth
-        self.url = "https://api.vasttrafik.se/ts/v1/traffic-situations"
+    def __init__(self, api_client=None):
+        if api_client is None:
+            api_client = ApiClient()
+        self.api_client = api_client
+        api_client.configuration.host = "https://ext-api.vasttrafik.se/ts/v1"
 
-    def __get(self, url):
-        header = {"Authorization": self.auth.token}
-        response = requests.get(url, headers=header)
-        response = self.auth.check_response(response)
+    def ts_v1_traffic_situations_get(self, **kwargs):  # noqa: E501
+        """Returns all current or future traffic situations.  # noqa: E501
 
-        return response.json()
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
 
-    def trafficsituations(self):
-        url = self.url
-        return self.__get(url)
+        >>> thread = api.ts_v1_traffic_situations_get(async_req=True)
+        >>> result = thread.get()
 
-    def stoppoint(self, gid):
-        url = self.url + f'/stoppoint/{gid}'
-        return self.__get(url)
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[TrafficSituationApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_get_with_http_info(**kwargs)  # noqa: E501
 
-    def situation(self, gid):
-        url = self.url + f'/{gid}'
-        return self.__get(url)
+    def ts_v1_traffic_situations_get_with_http_info(self, **kwargs):  # noqa: E501
+        """Returns all current or future traffic situations.  # noqa: E501
 
-    def line(self, gid):
-        url = self.url + f'/line/{gid}'
-        return self.__get(url)
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
 
-    def journey(self, gid):
-        url = self.url + f'/journey/{gid}'
-        return self.__get(url)
+        >>> thread = api.ts_v1_traffic_situations_get_with_http_info(async_req=True)
+        >>> result = thread.get()
 
-    def stoparea(self, gid):
-        url = self.url + f'/stoparea/{gid}'
-        return self.__get(url)
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[TrafficSituationApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[TrafficSituationApiModel]",
+            400: None,
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def ts_v1_traffic_situations_by_situation_number_get(self, situation_number, **kwargs):  # noqa: E501
+        """Returns the traffic situation with the specified situation number.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_by_situation_number_get(situation_number, async_req=True)
+        >>> result = thread.get()
+
+        :param situation_number: The situation number, e.g. \"2001186014\". (required)
+        :type situation_number: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TrafficSituationApiModel
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_by_situation_number_get_with_http_info(situation_number, **kwargs)  # noqa: E501
+
+    def ts_v1_traffic_situations_by_situation_number_get_with_http_info(self, situation_number, **kwargs):  # noqa: E501
+        """Returns the traffic situation with the specified situation number.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_by_situation_number_get_with_http_info(situation_number, async_req=True)
+        >>> result = thread.get()
+
+        :param situation_number: The situation number, e.g. \"2001186014\". (required)
+        :type situation_number: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TrafficSituationApiModel, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'situation_number'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_by_situation_number_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'situation_number' is set
+        if self.api_client.client_side_validation and local_var_params.get('situation_number') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `situation_number` when calling `ts_v1_traffic_situations_by_situation_number_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'situation_number' in local_var_params:
+            path_params['situationNumber'] = local_var_params['situation_number']  # noqa: E501
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "TrafficSituationApiModel",
+            400: None,
+            404: "str",
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations/{situationNumber}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def ts_v1_traffic_situations_journey_by_gid_get(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the journey with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_journey_by_gid_get(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The journey gid, e.g. \"9015014003310000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[TrafficSituationApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_journey_by_gid_get_with_http_info(gid, **kwargs)  # noqa: E501
+
+    def ts_v1_traffic_situations_journey_by_gid_get_with_http_info(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the journey with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_journey_by_gid_get_with_http_info(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The journey gid, e.g. \"9015014003310000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[TrafficSituationApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'gid'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_journey_by_gid_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `gid` when calling `ts_v1_traffic_situations_journey_by_gid_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'gid' in local_var_params:
+            path_params['gid'] = local_var_params['gid']  # noqa: E501
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[TrafficSituationApiModel]",
+            400: None,
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations/journey/{gid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def ts_v1_traffic_situations_stoparea_by_gid_get(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the stop area with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_stoparea_by_gid_get(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The stop point gid, e.g. \"9021014003310000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[TrafficSituationApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_stoparea_by_gid_get_with_http_info(gid, **kwargs)  # noqa: E501
+
+    def ts_v1_traffic_situations_stoparea_by_gid_get_with_http_info(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the stop area with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_stoparea_by_gid_get_with_http_info(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The stop point gid, e.g. \"9021014003310000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[TrafficSituationApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'gid'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_stoparea_by_gid_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `gid` when calling `ts_v1_traffic_situations_stoparea_by_gid_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'gid' in local_var_params:
+            path_params['gid'] = local_var_params['gid']  # noqa: E501
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[TrafficSituationApiModel]",
+            400: None,
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations/stoparea/{gid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def ts_v1_traffic_situations_stoppoint_by_gid_get(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the stop point with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_stoppoint_by_gid_get(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The stop point gid, e.g. \"9022014004850001\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[TrafficSituationApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_stoppoint_by_gid_get_with_http_info(gid, **kwargs)  # noqa: E501
+
+    def ts_v1_traffic_situations_stoppoint_by_gid_get_with_http_info(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the stop point with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_stoppoint_by_gid_get_with_http_info(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The stop point gid, e.g. \"9022014004850001\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[TrafficSituationApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'gid'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_stoppoint_by_gid_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `gid` when calling `ts_v1_traffic_situations_stoppoint_by_gid_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'gid' in local_var_params:
+            path_params['gid'] = local_var_params['gid']  # noqa: E501
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[TrafficSituationApiModel]",
+            400: None,
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations/stoppoint/{gid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))
+
+    def ts_v1_traffic_situations_line_by_gid_get(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the line with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = pyvasttrafik.ts_v1_traffic_situations_line_by_gid_get(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The line gid, e.g. \"9011014500100000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: list[TrafficSituationApiModel]
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.ts_v1_traffic_situations_line_by_gid_get_with_http_info(gid, **kwargs)  # noqa: E501
+
+    def ts_v1_traffic_situations_line_by_gid_get_with_http_info(self, gid, **kwargs):  # noqa: E501
+        """Returns the traffic situations for the line with the specified gid.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.ts_v1_traffic_situations_line_by_gid_get_with_http_info(gid, async_req=True)
+        >>> result = thread.get()
+
+        :param gid: The line gid, e.g. \"9011014500100000\". (required)
+        :type gid: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :type _return_http_data_only: bool, optional
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :type _preload_content: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(list[TrafficSituationApiModel], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        local_var_params = locals()
+
+        all_params = [
+            'gid'
+        ]
+        all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method ts_v1_traffic_situations_line_by_gid_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'gid' is set
+        if self.api_client.client_side_validation and local_var_params.get('gid') is None:  # noqa: E501
+            raise ApiValueError("Missing the required parameter `gid` when calling `ts_v1_traffic_situations_line_by_gid_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'gid' in local_var_params:
+            path_params['gid'] = local_var_params['gid']  # noqa: E501
+
+        query_params = []
+
+        header_params = dict(local_var_params.get('_headers', {}))
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['auth']  # noqa: E501
+
+        response_types_map = {
+            200: "list[TrafficSituationApiModel]",
+            400: None,
+            500: None,
+        }
+
+        return self.api_client.call_api(
+            '/traffic-situations/line/{gid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_types_map=response_types_map,
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats,
+            _request_auth=local_var_params.get('_request_auth'))

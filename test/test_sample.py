@@ -41,7 +41,7 @@ class TestAuthMethod(unittest.TestCase):
 
         rp.api_client.configuration.access_token = auth.token
 
-        data = rp.locations_by_coordinates_get(57.924079,11.589001)
+        data = rp.locations_by_coordinates_get(57.924079, 11.589001)
         # res = data.results[0]
 
         # print(data)
@@ -96,7 +96,8 @@ class TestAuthMethod(unittest.TestCase):
         # result = rp.stop_areas_stop_area_gid_departures_get(res.gid)
         result = rp.stop_points_stop_point_gid_departures_get('9022014015535001').results[0]
 
-        detail = rp.stop_areas_stop_area_gid_departures_details_reference_details_get(result.details_reference,'9022014015535001')
+        detail = rp.stop_areas_stop_area_gid_departures_details_reference_details_get(result.details_reference,
+                                                                                      '9022014015535001')
 
         # print(detail)
 
@@ -132,9 +133,10 @@ class TestAuthMethod(unittest.TestCase):
         # result = rp.stop_areas_stop_area_gid_departures_get(res.gid)
         result = rp.stop_points_stop_point_gid_arrivals_get('9022014015535001').results[0]
 
-        detail = rp.stop_areas_stop_area_gid_arrivals_details_reference_details_get(result.details_reference,'V3eyJUIjpbeyJSIjoiMXw2NDM1fDB8ODB8MzA5MjAyMyIsIkkiOjB9XX0')
+        detail = rp.stop_areas_stop_area_gid_arrivals_details_reference_details_get(result.details_reference,
+                                                                                    'V3eyJUIjpbeyJSIjoiMXw2NDM1fDB8ODB8MzA5MjAyMyIsIkkiOjB9XX0')
 
-        print(detail)
+        # print(detail)
 
     def test_departure_point(self):
         with open("credentials.csv", "r") as f:
@@ -147,10 +149,28 @@ class TestAuthMethod(unittest.TestCase):
         rp.api_client.configuration.access_token = auth.token
 
         result = rp.stop_points_stop_point_gid_departures_get('9022014015535001').results
+        # stop = rp.stop_points_stop_point_gid_departures_get('9022014015535001').pagination
 
-        # test = result.planned_time
+        # print(result)
 
-        # print(test)
+    def test_departure_point_details(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        result = rp.stop_points_stop_point_gid_departures_get('9022014015535001').results
+
+        ref = result[0].details_reference
+        stop = result[0].stop_point.gid
+
+        details = rp.stop_points_stop_point_gid_departures_details_reference_details_get(ref, stop)
+
+        # print(details)
 
     def test_arrival_point(self):
         with open("credentials.csv", "r") as f:
@@ -167,6 +187,25 @@ class TestAuthMethod(unittest.TestCase):
         # test = result.planned_time
 
         # print(test)
+
+    def test_arrival_point_details(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        rp = vasttrafik.Reseplaneraren()
+
+        rp.api_client.configuration.access_token = auth.token
+
+        result = rp.stop_points_stop_point_gid_arrivals_get('9022014015535001').results
+
+        ref = result[0].details_reference
+        stop = result[0].stop_point.gid
+
+        details = rp.stop_points_stop_point_gid_arrivals_details_reference_details_get(ref, stop)
+
+        # print(details)
 
     def test_journeys_get(self):
         with open("credentials.csv", "r") as f:
@@ -247,6 +286,130 @@ class TestAuthMethod(unittest.TestCase):
         interval = rp.journeys_valid_time_interval_get()
 
         # print(interval)
+
+    def test_traffic_situations_auth(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        # print(ts.api_client.configuration.access_token)
+
+    def test_traffic_situations_get(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        # sn1 = situation[0].situation_number
+
+        # print(situation)
+
+    def test_traffic_situations_number(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        sn1 = situation[0].situation_number
+
+        sit_detail = ts.ts_v1_traffic_situations_by_situation_number_get(sn1)
+
+        # print(sit_detail)
+
+    def test_traffic_situations_journey_by_gid(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        no_journeys = len(situation[0].affected_journeys)
+
+        if no_journeys > 0:
+            gid = situation[0].affected_journeys[0].gid
+        else:
+            gid = "No journey affected"
+
+        # print(gid)
+
+    def test_traffic_situations_stop_area_by_gid(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        # no_journeys = len(situation[0].affected_journeys)
+        stop_area_gid = situation[0].affected_stop_points[0].stop_area_gid
+
+        affected_stop_area = ts.ts_v1_traffic_situations_stoparea_by_gid_get(stop_area_gid)
+
+        # print(affected_stop_area)
+
+    def test_traffic_situations_stop_point_by_gid(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        # no_journeys = len(situation[0].affected_journeys)
+        stop_point_gid = situation[0].affected_stop_points[0].gid
+
+        affected_stop_point = ts.ts_v1_traffic_situations_stoppoint_by_gid_get(stop_point_gid)
+
+        # print(affected_stop_point)
+
+    def test_traffic_situations_stop_point_by_line(self):
+        with open("credentials.csv", "r") as f:
+            key, secret = f.read().split(",")
+
+        auth = vasttrafik.Auth(key, secret, 1)
+
+        ts = vasttrafik.TrafficSituations()
+
+        ts.api_client.configuration.access_token = auth.token
+
+        situation = ts.ts_v1_traffic_situations_get()
+
+        # no_journeys = len(situation[0].affected_journeys)
+        line_gid = situation[0].affected_lines[0].gid
+
+        affected_line = ts.ts_v1_traffic_situations_line_by_gid_get(line_gid)
+
+        print(affected_line)
 
 
 if __name__ == '__main__':
