@@ -23,7 +23,7 @@ import six
 from six.moves.urllib.parse import urlencode
 import urllib3
 
-from pyvasttrafik.api.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
+# from pyvasttrafik.api.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError
 
 
 logger = logging.getLogger(__name__)
